@@ -19,13 +19,12 @@ import java.util.UUID;
 @Table(name="MOD_MODEL")
 public class ModelEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "MOD_ID")
-    private UUID id ;
+    private String id ;
 
     @NotNull
     @NotEmpty
-    @Column(name = "MOD_NAME", length = 50, unique = true)
+    @Column(name = "MOD_NAME", length = 50)
     private String name;
 
     @NotNull

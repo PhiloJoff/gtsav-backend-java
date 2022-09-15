@@ -6,12 +6,9 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
-import java.util.Date;
 import java.util.List;
-import java.util.UUID;
 
 @Entity
 @Data
@@ -20,13 +17,12 @@ import java.util.UUID;
 @Table(name="SUP_SUPPLIER")
 public class SupplierEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "SUP_ID")
-    private UUID id ;
+    private String id ;
 
     @NotNull
     @NotEmpty
-    @Column(name = "SUP_NAME", length = 50)
+    @Column(name = "SUP_NAME", length = 50, unique = true)
     private String name;
 
     @ToString.Exclude
