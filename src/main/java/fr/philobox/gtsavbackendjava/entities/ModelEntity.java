@@ -33,18 +33,4 @@ public class ModelEntity {
     @JoinColumn(name = "SUP_ID")
     private SupplierEntity supplier;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "model")
-    private List<TicketEntity> tickets;
-
-    @ManyToMany
-    @JoinTable(name = "MODEL_TYPE", joinColumns = { @JoinColumn(name = "MOD_ID") }, inverseJoinColumns = { @JoinColumn(name = "TYP_ID") })
-    private List<TypeEntity> types;
-
-    public ModelEntity(String name, SupplierEntity supplier) {
-        this.name = name;
-        this.supplier = supplier;
-        this.tickets = new ArrayList<>();
-        this.types = new ArrayList<>();
-    }
-
 }
