@@ -8,7 +8,7 @@ import java.util.List;
 public interface SupplierService {
     SupplierResponseDTO saveSupplier(SupplierRequestDTO supplierRequestDto);
     SupplierResponseDTO getSupplierById(String id);
-    SupplierResponseDTO updateSupplier(SupplierRequestDTO supplierRequestDto);
+    SupplierResponseDTO updateSupplier(String id, SupplierRequestDTO supplierRequestDto) throws Exception;
     void deleteSupplier(String id) throws Exception;
     List<SupplierResponseDTO> getAllSuppliers();
 

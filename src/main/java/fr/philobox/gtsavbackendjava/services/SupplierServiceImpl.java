@@ -48,11 +48,13 @@ public class SupplierServiceImpl implements SupplierService {
     }
 
     @Override
-    public SupplierResponseDTO updateSupplier(SupplierRequestDTO supplierRequestDto) {
+    public SupplierResponseDTO updateSupplier(String id, SupplierRequestDTO supplierRequestDto) throws Exception {
+        if (!supplierRepository.existsById(id))
+            throw new Exception("Supplier not found");
         SupplierEntity supplierEntity = supplierMapper.supplierRequestDTOToSupplierEntity(supplierRequestDto);
 
-        SupplierEntity supplierSaved = supplierRepository.save(supplierEntity);
-        return supplierMapper.supplierToSupplierResponseDTO(supplierSaved);
+        SupplierEntity supplierUpdated = supplierRepository.save(supplierEntity);
+        return supplierMapper.supplierToSupplierResponseDTO(supplierUpdated);
     }
 
     @Override

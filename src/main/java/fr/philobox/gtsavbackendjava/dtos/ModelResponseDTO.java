@@ -7,7 +7,8 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class SupplierRequestDTO {
-    private String supplierId;
-    private String supplierName;
+public class ModelResponseDTO {
+    private String modelId;
+    private String modelName;
+    private SupplierResponseDTO supplier;
 }

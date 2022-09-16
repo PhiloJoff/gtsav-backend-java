@@ -5,7 +5,6 @@ import fr.philobox.gtsavbackendjava.dtos.SupplierResponseDTO;
 import fr.philobox.gtsavbackendjava.entities.SupplierEntity;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
-import org.mapstruct.Mappings;
 
 @Mapper(componentModel = "spring")
 public interface SupplierMapper {
@@ -14,6 +13,7 @@ public interface SupplierMapper {
     SupplierResponseDTO supplierToSupplierResponseDTO(SupplierEntity supplierEntity);
 
 
+    @Mapping(source = "supplierId", target = "id")
     @Mapping(source = "supplierName", target = "name")
     SupplierEntity supplierRequestDTOToSupplierEntity(SupplierRequestDTO supplierRequestDTO);
 }

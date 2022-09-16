@@ -29,6 +29,11 @@ public class SupplierRestController {
         return supplierService.saveSupplier(supplierRequestDTO);
     }
 
+    @PutMapping(path = "/suppliers/update/{id}")
+    public SupplierResponseDTO saveSupplier(@PathVariable String id, SupplierRequestDTO supplierRequestDTO) throws Exception {
+        return supplierService.updateSupplier(id, supplierRequestDTO);
+    }
+
     @DeleteMapping(path = "/suppliers/{id}")
     public void deleteSupplier(@PathVariable String id) throws Exception {
         supplierService.deleteSupplier(id);
