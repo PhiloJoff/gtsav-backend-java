@@ -92,4 +92,14 @@ public class ModelServiceImpl implements ModelService {
         ).collect(Collectors.toList());
         return modelResponseDTOS;
     }
+
+    @Override
+    public List<ModelResponseDTO> getAllModelsByName(String name) {
+        List<ModelEntity> modelEntities = modelRepository.findAllByNameContainsIgnoreCase(name);
+
+        List<ModelResponseDTO> modelResponseDTOS = modelEntities.stream().map(
+                modelEntity -> modelMapper.modelToModelResponseDTO(modelEntity)
+        ).collect(Collectors.toList());
+        return modelResponseDTOS;
+    }
 }

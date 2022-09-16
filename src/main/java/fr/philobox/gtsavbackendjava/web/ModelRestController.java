@@ -11,6 +11,7 @@ import java.util.List;
 @RestController
 @RequestMapping(path = "/model")
 @AllArgsConstructor
+@CrossOrigin("*")
 public class ModelRestController {
     private ModelService modelService;
 
@@ -22,6 +23,10 @@ public class ModelRestController {
     @GetMapping(path = "/models/supplier/{id}")
     public List<ModelResponseDTO> getAllModelsBySupplier(@PathVariable String id) {
         return modelService.getAllModelsBySupplier(id);
+    }
+    @GetMapping(path = "/models/search")
+    public List<ModelResponseDTO> getAllModelsByName(@RequestParam(name= "name", defaultValue = "") String name) {
+        return modelService.getAllModelsByName(name);
     }
 
     @GetMapping(path = "/models/{id}")

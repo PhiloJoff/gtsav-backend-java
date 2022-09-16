@@ -8,6 +8,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class SupplierRequestDTO {
-    private String supplierId;
-    private String supplierName;
+    private String id;
+    private String name;
 }

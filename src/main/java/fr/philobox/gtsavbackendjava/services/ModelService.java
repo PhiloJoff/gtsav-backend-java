@@ -12,6 +12,5 @@ public interface ModelService {
     void deleteModel(String id) throws Exception;
     List<ModelResponseDTO> getAllModels();
     List<ModelResponseDTO> getAllModelsBySupplier(String supplierId);
-
-
+    List<ModelResponseDTO> getAllModelsByName(String name);
 }

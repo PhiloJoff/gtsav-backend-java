@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ModelRequestDTO {
-    private String modelId;
-    private String modelName;
+    private String id;
+    private String name;
     private SupplierRequestDTO supplier;
 }
