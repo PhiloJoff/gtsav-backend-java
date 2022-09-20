@@ -35,12 +35,12 @@ public class ModelRestController {
     }
 
     @PostMapping(path = "/models/add")
-    public ModelResponseDTO saveModel(ModelRequestDTO modelRequestDTO) {
+    public ModelResponseDTO saveModel(@RequestBody ModelRequestDTO modelRequestDTO) {
         return modelService.saveModel(modelRequestDTO);
     }
 
     @PutMapping(path = "/models/update/{id}")
-    public ModelResponseDTO saveModel(@PathVariable String id, ModelRequestDTO modelRequestDTO) throws Exception {
+    public ModelResponseDTO saveModel(@PathVariable String id, @RequestBody ModelRequestDTO modelRequestDTO) throws Exception {
         return modelService.updateModel(id, modelRequestDTO);
     }
 

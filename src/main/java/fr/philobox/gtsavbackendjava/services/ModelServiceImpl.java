@@ -30,9 +30,9 @@ public class ModelServiceImpl implements ModelService {
         ModelEntity modelEntity = modelMapper.modelRequestDTOToModel(modelRequestDto);
 
         modelEntity.setId(UUID.randomUUID().toString());
-        ModelEntity modelEnitySaved = modelRepository.save(modelEntity);
+        ModelEntity modelEntitySaved = modelRepository.save(modelEntity);
 
-        return modelMapper.modelToModelResponseDTO(modelEnitySaved);
+        return modelMapper.modelToModelResponseDTO(modelEntitySaved);
     }
 
     @Override

@@ -26,12 +26,12 @@ public class SupplierRestController {
     }
 
     @PostMapping(path = "/suppliers/add")
-    public SupplierResponseDTO saveSupplier(SupplierRequestDTO supplierRequestDTO) {
+    public SupplierResponseDTO saveSupplier(@RequestBody SupplierRequestDTO supplierRequestDTO) {
         return supplierService.saveSupplier(supplierRequestDTO);
     }
 
     @PutMapping(path = "/suppliers/update/{id}")
-    public SupplierResponseDTO saveSupplier(@PathVariable String id, SupplierRequestDTO supplierRequestDTO) throws Exception {
+    public SupplierResponseDTO updateSupplier(@PathVariable String id, @RequestBody SupplierRequestDTO supplierRequestDTO) throws Exception {
         return supplierService.updateSupplier(id, supplierRequestDTO);
     }
 
