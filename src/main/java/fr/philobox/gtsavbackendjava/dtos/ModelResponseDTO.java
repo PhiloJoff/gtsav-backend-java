@@ -11,4 +11,6 @@ public class ModelResponseDTO {
     private String id;
     private String name;
     private SupplierResponseDTO supplier;
+    private int currentPage;
+    private int totalPages;
 }

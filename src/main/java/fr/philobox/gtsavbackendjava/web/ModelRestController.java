@@ -25,8 +25,12 @@ public class ModelRestController {
         return modelService.getAllModelsBySupplier(id);
     }
     @GetMapping(path = "/models/search")
-    public List<ModelResponseDTO> getAllModelsByName(@RequestParam(name= "name", defaultValue = "") String name) {
-        return modelService.getAllModelsByName(name);
+    public List<ModelResponseDTO> getAllModelsByName(
+            @RequestParam(name= "name", defaultValue = "") String name,
+            @RequestParam(name="page", defaultValue = "0") int pageNbr,
+            @RequestParam(name="size", defaultValue = "5") int size
+            ) {
+        return modelService.getAllModelsByName(name, pageNbr, size);
     }
 
     @GetMapping(path = "/models/{id}")

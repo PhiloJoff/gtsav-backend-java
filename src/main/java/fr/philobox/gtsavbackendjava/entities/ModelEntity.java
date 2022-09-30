@@ -28,7 +28,7 @@ public class ModelEntity {
     private String name;
 
     @NotNull
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "SUP_ID")
     private SupplierEntity supplier;
 

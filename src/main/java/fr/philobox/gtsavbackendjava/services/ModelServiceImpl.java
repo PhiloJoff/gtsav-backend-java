@@ -6,6 +6,8 @@ import fr.philobox.gtsavbackendjava.entities.ModelEntity;
 import fr.philobox.gtsavbackendjava.mappers.ModelMapper;
 import fr.philobox.gtsavbackendjava.repositories.ModelRepository;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -94,11 +96,17 @@ public class ModelServiceImpl implements ModelService {
     }
 
     @Override
-    public List<ModelResponseDTO> getAllModelsByName(String name) {
-        List<ModelEntity> modelEntities = modelRepository.findAllByNameContainsIgnoreCase(name);
-
+    public List<ModelResponseDTO> getAllModelsByName(String name, int pageNbr, int size) {
+        Page<ModelEntity> modelPages = modelRepository.findAllByNameContainsIgnoreCase(name, PageRequest.of(pageNbr, size));
+        int totalPages = modelPages.getTotalPages();
+        List<ModelEntity> modelEntities = modelPages.getContent();
         List<ModelResponseDTO> modelResponseDTOS = modelEntities.stream().map(
-                modelEntity -> modelMapper.modelToModelResponseDTO(modelEntity)
+                modelEntity -> {
+                    ModelResponseDTO modelResponseDTO = modelMapper.modelToModelResponseDTO(modelEntity);
+                    modelResponseDTO.setCurrentPage(pageNbr);
+                    modelResponseDTO.setTotalPages(totalPages);
+                    return modelResponseDTO;
+                }
         ).collect(Collectors.toList());
         return modelResponseDTOS;
     }

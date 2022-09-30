@@ -4,11 +4,18 @@ import fr.philobox.gtsavbackendjava.entities.ModelEntity;
 import fr.philobox.gtsavbackendjava.entities.SupplierEntity;
 import fr.philobox.gtsavbackendjava.repositories.ModelRepository;
 import fr.philobox.gtsavbackendjava.repositories.SupplierRepository;
+import fr.philobox.gtsavbackendjava.security.entities.AppRole;
+import fr.philobox.gtsavbackendjava.security.entities.AppUser;
+import fr.philobox.gtsavbackendjava.security.service.AccountService;
+import fr.philobox.gtsavbackendjava.services.ModelService;
+import fr.philobox.gtsavbackendjava.services.SupplierService;
 import lombok.AllArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.ui.Model;
 
 import java.util.ArrayList;
@@ -17,17 +24,19 @@ import java.util.UUID;
 import java.util.stream.Stream;
 
 @SpringBootApplication
-@AllArgsConstructor
 public class GtsavBackendJavaApplication {
-    private SupplierRepository supplierRepository;
-    private ModelRepository modelRepository;
 
     public static void main(String[] args) {
         SpringApplication.run(GtsavBackendJavaApplication.class, args);
     }
 
     @Bean
-    CommandLineRunner start (SupplierRepository supplierRepository, ModelRepository modelRepository) {
+    PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
+
+    @Bean
+    CommandLineRunner start (SupplierRepository supplierRepository, ModelRepository modelRepository, AccountService accountService) {
         return args -> {
             Stream.of("Mobalpa", "Cuir Center", "Roche Bobois").forEach(name->{
                 supplierRepository.save(
@@ -51,6 +60,19 @@ public class GtsavBackendJavaApplication {
                         )
                 );
             });
+
+            accountService.addRole(new AppRole(null, "ADMIN"));
+            accountService.addRole(new AppRole(null, "USER"));
+
+            Stream.of("User1", "Admin", "User2").forEach(name -> {
+                accountService.addUser(new AppUser(null, name, "1234", new ArrayList<>()));
+            });
+
+            accountService.addRoleToUser("ADMIN","Admin");
+            accountService.addRoleToUser("USER","User1");
+            accountService.addRoleToUser("USER","User2");
+
+
 
         };
 
